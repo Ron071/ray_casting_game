@@ -10,19 +10,13 @@ using namespace sf;
 #define ANGLE 90
 
 class Player{
-    CircleShape p;
+    CircleShape player;
     std::vector<Ray> rays;
-    sf::Texture wall_texture;
-    sf::Sprite wall_sprite;
-    sf::Texture sky_texture;
-    sf::Sprite sky_sprite;
-    sf::Texture floor_texture;
-    sf::Sprite floor_sprite;
     public:
         Player();
-        void draw(RenderWindow& w,RenderWindow& w2, const Maze& m);
-        bool checkCollision(const Maze& m) const;
-        void move();
+        void draw(RenderWindow& windowOne,RenderWindow& windowTwo, const Maze& maze);
+        bool checkCollision(const Maze& maze) const;
+        void move(const Maze& maze);
         void turnR();
         void turnL();
         void reset();

@@ -6,45 +6,42 @@
 Game::Game(){  
 }
 void Game::game(){
-    sf::RenderWindow w(VideoMode(SW, SW), "MAZE");
-    sf::RenderWindow w2(VideoMode(BW, BW), "GAME");
-    w2.setFramerateLimit(120);
-    sf::Clock clock;
+    sf::RenderWindow windowOne(VideoMode(SW, SW), "MAZE");
+    sf::RenderWindow windowTwo(VideoMode(BW, BW), "GAME");
+    windowTwo.setFramerateLimit(120);
+    sf::Clock clock;  // set font inside class
     sf::Time deltaTime;
-    sf::Music music;
-    //music.openFromFile("chipi.mp3");
-    //music.play();
     sf::Font font;
     font.loadFromFile("text.ttf");
-    int i = 0;
     sf::Text text;
     text.setFont(font);
-    while(w2.isOpen()){
+    int i = 0;
+    while(windowTwo.isOpen()){
         Event event;
-        while(w2.pollEvent(event)){
+        while(windowTwo.pollEvent(event)){
             if(event.type == Event::Closed){
-                w.close();
-                w2.close();
+                windowOne.close();
+                windowTwo.close();
             }    
         }
         if(Keyboard::isKeyPressed(Keyboard::W)){
-            if(!p.checkCollision(m))p.move();
+            player.move(maze);
         }
         if(Keyboard::isKeyPressed(Keyboard::A)){
-            p.turnL();
+            player.turnL();
         }
         if(Keyboard::isKeyPressed(Keyboard::D)){
-            p.turnR();
+            player.turnR();
         }
         if(Keyboard::isKeyPressed(Keyboard::U)){
             update();
         }
         deltaTime = clock.restart();
-        w.clear();
-        w2.clear();
-        m.draw(w);
-        p.draw(w, w2, m);
-        w2.draw(text);
+        windowOne.clear();
+        windowTwo.clear();
+        maze.draw(windowOne);
+        player.draw(windowOne, windowTwo, maze);
+        windowTwo.draw(text);
         if(i > 100){
             float fps = 1.0f / deltaTime.asSeconds();
             text.setString("FPS: " + std::to_string((int)round(fps / 10) * 10));
@@ -55,10 +52,16 @@ void Game::game(){
             i=0;
         }
         i++;
-        w2.display();  
+        windowTwo.display();  
+        windowOne.display();
     }
 }
 void Game::update(){
-    p.reset();
-    m.updateMaze();
+    player.reset();
+    maze.updateMaze();
 }
+
+
+
+
+////   g++ game.cpp main.cpp maze.cpp player.cpp ray.cpp  -lsfml-graphics -lsfml-window -lsfml-system

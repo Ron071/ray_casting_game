@@ -6,8 +6,8 @@
 #define BW 600
 
 class Game{
-    Player p;
-    Maze m;
+    Player player;
+    Maze maze;
     public:
         Game();
         void game();
