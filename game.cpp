@@ -7,8 +7,9 @@ Game::Game(){
 }
 void Game::game(){
     sf::RenderWindow windowOne(VideoMode(SW, SW), "MAZE");
-    sf::RenderWindow windowTwo(VideoMode(BW, BW), "GAME");
-    windowTwo.setFramerateLimit(120);
+    //sf::RenderWindow windowTwo(VideoMode(BW, BW), "GAME");
+    windowOne.setFramerateLimit(30);
+    windowOne.setSize(Vector2u(900,900));
     sf::Clock clock;  // set font inside class
     sf::Time deltaTime;
     sf::Font font;
@@ -16,12 +17,13 @@ void Game::game(){
     sf::Text text;
     text.setFont(font);
     int i = 0;
-    while(windowTwo.isOpen()){
+    while(windowOne.isOpen()){
         Event event;
-        while(windowTwo.pollEvent(event)){
+        while(windowOne.pollEvent(event)){
             if(event.type == Event::Closed){
                 windowOne.close();
-                windowTwo.close();
+                //windowTwo.close();
+                return;
             }    
         }
         if(Keyboard::isKeyPressed(Keyboard::W)){
@@ -38,10 +40,10 @@ void Game::game(){
         }
         deltaTime = clock.restart();
         windowOne.clear();
-        windowTwo.clear();
+        //windowTwo.clear();
         maze.draw(windowOne);
-        player.draw(windowOne, windowTwo, maze);
-        windowTwo.draw(text);
+        player.draw(windowOne, windowOne, maze);
+        //windowTwo.draw(text);
         if(i > 100){
             float fps = 1.0f / deltaTime.asSeconds();
             text.setString("FPS: " + std::to_string((int)round(fps / 10) * 10));
@@ -52,7 +54,7 @@ void Game::game(){
             i=0;
         }
         i++;
-        windowTwo.display();  
+        //windowTwo.display();  
         windowOne.display();
     }
 }
@@ -64,4 +66,4 @@ void Game::update(){
 
 
 
-////   g++ game.cpp main.cpp maze.cpp player.cpp ray.cpp  -lsfml-graphics -lsfml-window -lsfml-system
+////   g++ -g game.cpp main.cpp maze.cpp player.cpp ray.cpp -o game -lsfml-graphics -lsfml-window -lsfml-system

@@ -19,14 +19,14 @@ float Ray::len()const {
 Vector2f Ray::getcurr() const{
     return curr;
 }
-sf::Vector2f Ray::finalPoint(float angle, const Maze& m,  Vector2f current){
+sf::Vector2f Ray::finalPoint(float angle, const Maze& maze,  Vector2f current){
     float len = 0;
     sf::Vector2f direction(std::cos(angle), std::sin(angle));
     Vector2f res = current;
     int count = 0;
     float tempx;
     float tempy;
-    while(count < 10){
+    while(1){
         count++;
         if(angle <= (PI/2) || angle >= (1.5*PI)){
             tempx = ((int)current.x/CUBE+1)*(CUBE) -current.x;
@@ -49,7 +49,7 @@ sf::Vector2f Ray::finalPoint(float angle, const Maze& m,  Vector2f current){
             len = RAY_LEN;
             break;
         }
-        if(!m.getCell((int)current.y/CUBE, (int)current.x/CUBE)){
+        if(!maze.getCell((int)current.y/CUBE, (int)current.x/CUBE)){
             break;
         }
     }
