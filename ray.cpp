@@ -10,10 +10,10 @@ void Ray::setPoints(Vector2f one, Vector2f two){
     ray[0] = one;
     ray[1] = two;
 }
-void Ray::draw(RenderWindow& windowOne) const{
-    windowOne.draw(ray);
+void Ray::draw(RenderWindow* windowOne) const{
+    windowOne->draw(ray);
 }
-Vector2f Ray::finalPoint(float angle, const Maze& maze,  Vector2f current){  // angle in radians
+Vector2f Ray::finalPoint(float angle, const Maze* maze,  Vector2f current){  // angle in radians
     float len = 0;
     Vector2f direction(std::cos(angle), std::sin(angle));
     Vector2f res = current;
@@ -41,7 +41,7 @@ Vector2f Ray::finalPoint(float angle, const Maze& maze,  Vector2f current){  // 
             len = RAY_LEN;
             break;
         }
-        if(!maze.getCell((int)current.y/CUBE, (int)current.x/CUBE)){
+        if(!(maze->getCell((int)current.y/CUBE, (int)current.x/CUBE))){
             break;
         }
     }
