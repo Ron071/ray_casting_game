@@ -3,7 +3,7 @@ CXX = g++
 CXXFLAGS = -g -std=c++11 -Wall
 
 # SFML libraries
-SFML_LIBS = -lsfml-graphics -lsfml-window -lsfml-system
+SFML_LIBS = -lsfml-graphics -lsfml-window -lsfml-system -pthread
 
 # Source files and output
 SRC = game.cpp main.cpp maze.cpp player.cpp ray.cpp

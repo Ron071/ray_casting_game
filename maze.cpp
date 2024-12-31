@@ -38,14 +38,14 @@ void update(int arr[2*N-1][2*N-1]){
 Maze::Maze(){
     updateMaze();
 }
-void Maze::draw(sf::RenderWindow& w) const{
-    sf::RectangleShape rec(sf::Vector2f(CUBE, CUBE));
-    rec.setFillColor(sf::Color::Green);
+void Maze::draw(sf::RenderWindow& window) const{
+    sf::RectangleShape cube(sf::Vector2f(CUBE, CUBE));
+    cube.setFillColor(sf::Color::Green);
     for(int i = 0; i < 2*N-1; i++){
         for(int j = 0; j < 2*N-1; j++){
             if(!this->arr[i][j]){
-                rec.setPosition(CUBE*j, CUBE*i);
-                w.draw(rec);
+                cube.setPosition(CUBE*j, CUBE*i);
+                window.draw(cube);
             }
         }
     }

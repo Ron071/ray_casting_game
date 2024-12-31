@@ -6,7 +6,7 @@
 #include "SFML/Graphics.hpp"
 using namespace sf;
 #define SPEED 0.3
-#define RAYS 600
+#define RAYS 1000000
 #define ANGLE 90
 
 class Player{

@@ -8,7 +8,7 @@ Game::Game(){
 void Game::game(){
     sf::RenderWindow windowOne(VideoMode(SW, SW), "MAZE");
     //sf::RenderWindow windowTwo(VideoMode(BW, BW), "GAME");
-    windowOne.setFramerateLimit(30);
+    //windowOne.setFramerateLimit(30);
     windowOne.setSize(Vector2u(900,900));
     sf::Clock clock;  // set font inside class
     sf::Time deltaTime;
@@ -23,7 +23,7 @@ void Game::game(){
             if(event.type == Event::Closed){
                 windowOne.close();
                 //windowTwo.close();
-                return;
+                exit(0);
             }    
         }
         if(Keyboard::isKeyPressed(Keyboard::W)){
@@ -66,4 +66,4 @@ void Game::update(){
 
 
 
-////   g++ -g game.cpp main.cpp maze.cpp player.cpp ray.cpp -o game -lsfml-graphics -lsfml-window -lsfml-system
+////   g++ -g game.cpp main.cpp maze.cpp player.cpp ray.cpp  -lsfml-graphics -lsfml-window -lsfml-system -pthread -o game
