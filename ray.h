@@ -8,8 +8,10 @@ using namespace sf;
 
 class Ray{
     VertexArray ray;
+    float lenght;
     public:
         Ray();
+        float len();
         void setPoints(Vector2f one, Vector2f two);
         void draw(RenderWindow* windowOne) const;
         sf::Vector2f finalPoint(float angle, const Maze* maze,  Vector2f current);

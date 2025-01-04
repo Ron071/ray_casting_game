@@ -7,7 +7,7 @@
 #include <pthread.h>
 using namespace sf;
 #define SPEED 0.3
-#define RAYS 10
+#define RAYS 900
 #define ANGLE 90
 
 
@@ -32,7 +32,7 @@ class Player{
 
 
 
-struct Data{
+/*struct Data{
     int i;
     RenderWindow* windowOne;
     RenderWindow* windowTwo;
@@ -40,6 +40,6 @@ struct Data{
     Player* player;
     Data(int i, RenderWindow* windowOne, RenderWindow* windowTwo, const Maze* maze, Player* player):
     i(i), windowOne(windowOne), windowTwo(windowTwo), maze(maze), player(player){}
-};
+};*/
 
 #endif //PLAYER_H

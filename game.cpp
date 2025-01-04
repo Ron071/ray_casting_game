@@ -7,20 +7,20 @@ Game::Game(){
 }
 void Game::game(){
     sf::RenderWindow windowOne(VideoMode(SW, SW), "MAZE");
-    //sf::RenderWindow windowTwo(VideoMode(BW, BW), "GAME");
-    //windowOne.setFramerateLimit(30);
-    int avr = 0;
-    int count = 0;
-    windowOne.setSize(Vector2u(900,900));
-    sf::Clock clock; 
-    sf::Time deltaTime;
-    while(windowOne.isOpen()){
-        deltaTime = clock.restart();
+    sf::RenderWindow windowTwo(VideoMode(BW, BW), "GAME");
+    windowOne.setFramerateLimit(30);
+    // int avr = 0;
+    // int count = 0;
+    windowOne.setSize(Vector2u(SW,SW));
+    windowTwo.setSize(Vector2u(BW,BW));
+    // sf::Clock clock; 
+    // sf::Time deltaTime;
+    while(windowOne.isOpen() && windowTwo.isOpen()){
         Event event;
         while(windowOne.pollEvent(event)){
             if(event.type == Event::Closed){
                 windowOne.close();
-                //windowTwo.close();
+                windowTwo.close();
                 exit(0);
             }    
         }
@@ -33,22 +33,23 @@ void Game::game(){
         if(Keyboard::isKeyPressed(Keyboard::D)){
             player.turnR();
         }
-        if(Keyboard::isKeyPressed(Keyboard::U)){
+        /*if(Keyboard::isKeyPressed(Keyboard::U)){
             update();
-        }
+        }*/
         windowOne.clear();
-        //windowTwo.clear();
+        windowTwo.clear();
         maze.draw(windowOne);
-        player.draw(&windowOne, &windowOne, &maze);
-        //windowTwo.display();  
+        player.draw(&windowOne, &windowTwo, &maze);
+        windowTwo.display();  
         windowOne.display();
-        avr += (int)(1.0f / deltaTime.asSeconds());
-        count++;
-        if(count%500 == 0){
-            std::cout <<  "FPS " << avr/count << std::endl;
-            count = 0;
-            avr = 0;
-        }
+        // avr += (int)(1.0f / deltaTime.asSeconds());
+        // count++;
+        // if(count%500 == 0){
+        //     std::cout <<  "FPS " << avr/count << std::endl;
+        //     count = 0;
+        //     avr = 0;
+        // }
+        // deltaTime = clock.restart();
     }
 }
 void Game::update(){
