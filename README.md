@@ -1,4 +1,4 @@
-Raycasting Maze Game
+Raycasting Maze Game.    in progress 
 
 This project is a raycasting-based maze game developed in C++ using the SFML library. It features an efficient raycasting algorithm implemented with trigonometry, dynamic maze generation, and multithreading using pthreads to enhance performance and responsiveness.
 
