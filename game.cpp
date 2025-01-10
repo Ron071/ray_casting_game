@@ -6,21 +6,17 @@
 Game::Game(){  
 }
 void Game::game(){
-    sf::RenderWindow windowOne(VideoMode(SW, SW), "MAZE");
-    sf::RenderWindow windowTwo(VideoMode(BW, BW), "GAME");
-    windowOne.setFramerateLimit(30);
-    // int avr = 0;
-    // int count = 0;
-    windowOne.setSize(Vector2u(SW,SW));
-    windowTwo.setSize(Vector2u(BW,BW));
+    sf::ContextSettings settings;
+    settings.antialiasingLevel = 8; 
+    sf::RenderWindow window(sf::VideoMode(BW, BW), "GAME", sf::Style::Default, settings);
+    window.setFramerateLimit(30);
     // sf::Clock clock; 
     // sf::Time deltaTime;
-    while(windowOne.isOpen() && windowTwo.isOpen()){
+    while(window.isOpen()){
         Event event;
-        while(windowOne.pollEvent(event)){
+        while(window.pollEvent(event)){
             if(event.type == Event::Closed){
-                windowOne.close();
-                windowTwo.close();
+                window.close();
                 exit(0);
             }    
         }
@@ -36,12 +32,9 @@ void Game::game(){
         /*if(Keyboard::isKeyPressed(Keyboard::U)){
             update();
         }*/
-        windowOne.clear();
-        windowTwo.clear();
-        maze.draw(windowOne);
-        player.draw(&windowOne, &windowTwo, &maze);
-        windowTwo.display();  
-        windowOne.display();
+        window.clear();
+        player.draw(&window, &maze);
+        window.display();  
         // avr += (int)(1.0f / deltaTime.asSeconds());
         // count++;
         // if(count%500 == 0){

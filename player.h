@@ -6,8 +6,8 @@
 #include "SFML/Graphics.hpp"
 #include <pthread.h>
 using namespace sf;
-#define SPEED 0.3
-#define RAYS 900
+#define SPEED 0.15
+#define RAYS 1000
 #define ANGLE 90
 
 
@@ -18,7 +18,7 @@ class Player{
     std::vector<Ray> rays;
     public:
         Player();
-        void draw(RenderWindow* windowOne,RenderWindow* windowTwo, const Maze* maze);
+        void draw(RenderWindow* windowOne, const Maze* maze);
         float rotation();
         Vector2f position();
         Ray* ray(int i);
@@ -29,17 +29,5 @@ class Player{
         void reset();
         ~Player();
 };
-
-
-
-/*struct Data{
-    int i;
-    RenderWindow* windowOne;
-    RenderWindow* windowTwo;
-    const Maze* maze;
-    Player* player;
-    Data(int i, RenderWindow* windowOne, RenderWindow* windowTwo, const Maze* maze, Player* player):
-    i(i), windowOne(windowOne), windowTwo(windowTwo), maze(maze), player(player){}
-};*/
 
 #endif //PLAYER_H

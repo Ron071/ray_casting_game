@@ -1,7 +1,6 @@
 #include "maze.h"
 #include <random>
 #include <iostream>
-#include "SFML/Graphics.hpp"
 using namespace std;
 
 
@@ -33,25 +32,40 @@ void update(int arr[2*N-1][2*N-1]){
             else arr[2*i+1][2*j+2] = 1;
         }
     }
+    while(1){
+        int i = rand()%(2*N-1);
+        int j = rand()%(2*N-1);
+        if(arr[i][j] == 1){
+            arr[i][j] = 2;
+            return;
+        }
+    }
+
 }
 
 Maze::Maze(){
     updateMaze();
 }
-void Maze::draw(sf::RenderWindow& window) const{
+void Maze::draw(sf::RenderWindow* window) const{
     sf::RectangleShape cube(sf::Vector2f(CUBE, CUBE));
-    cube.setFillColor(sf::Color::Green);
+    cube.setFillColor(sf::Color::Magenta);
+    sf::RectangleShape cube2(sf::Vector2f(CUBE, CUBE));
+    cube2.setFillColor(sf::Color::Black);
     for(int i = 0; i < 2*N-1; i++){
         for(int j = 0; j < 2*N-1; j++){
-            if(!this->arr[i][j]){
-                cube.setPosition(CUBE*j, CUBE*i);
-                window.draw(cube);
+            if(this->arr[i][j] == 0){
+                cube.setPosition(CUBE*j, (600-2*N*CUBE) + CUBE*i);
+                window->draw(cube);
+            }
+            else if(this->arr[i][j] == 2){
+                cube2.setPosition(CUBE*j, (600-2*N*CUBE)+ CUBE*i);
+                window->draw(cube2);
             }
         }
     }
 
 }
-bool Maze::getCell(int i, int j) const{
+int Maze::getCell(int i, int j) const{
     return this->arr[i][j];
 }
 void Maze::updateMaze(){
